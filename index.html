@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Eating & Restaurant Navigation - Neurodivergent Affinity Group</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #374151;
+            background: linear-gradient(135deg, #fef3e2 0%, #fae8d4 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #e07856 0%, #d4a574 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #f3e8d8;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #8fbc8f 0%, #9fb89f 100%);
+            color: white;
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .section-header:hover {
+            background: linear-gradient(135deg, #7aaa7a 0%, #8aa88a 100%);
+        }
+
+        .section-header-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .section-icon {
+            width: 28px;
+            height: 28px;
+        }
+
+        .chevron {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .chevron.rotated {
+            transform: rotate(180deg);
+        }
+
+        .section-content {
+            padding: 25px;
+            background: #fefefe;
+            display: none;
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        .content-box {
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .bg-coral-50 {
+            background-color: #fff5f2;
+        }
+
+        .bg-green-50 {
+            background-color: #f0f9f4;
+        }
+
+        .bg-blue-50 {
+            background-color: #eff6ff;
+        }
+
+        .bg-yellow-50 {
+            background-color: #fefce8;
+        }
+
+        .bg-purple-50 {
+            background-color: #faf5ff;
+        }
+
+        .bg-gray-50 {
+            background-color: #f9fafb;
+        }
+
+        .text-coral-800 {
+            color: #9a3412;
+        }
+
+        .text-green-800 {
+            color: #166534;
+        }
+
+        .text-blue-800 {
+            color: #1e40af;
+        }
+
+        .text-gray-700 {
+            color: #374151;
+        }
+
+        .text-gray-800 {
+            color: #1f2937;
+        }
+
+        .text-purple-700 {
+            color: #7c3aed;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        h4 {
+            font-size: 1.125rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .facilitator-note {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .facilitator-note strong {
+            color: #92400e;
+        }
+
+        .space-y-4 > * + * {
+            margin-top: 20px;
+        }
+
+        .strategy-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        .border-l-4 {
+            border-left: 4px solid;
+        }
+
+        .border-coral {
+            border-color: #e07856;
+        }
+
+        .border-blue {
+            border-color: #3b82f6;
+        }
+
+        .border-green {
+            border-color: #10b981;
+        }
+
+        .print-button {
+            background: linear-gradient(135deg, #e07856 0%, #d4a574 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            display: block;
+            margin: 30px auto;
+            transition: all 0.3s ease;
+        }
+
+        .print-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(224, 120, 86, 0.3);
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .section-header {
+                cursor: default;
+            }
+            
+            .section-content {
+                display: block !important;
+            }
+            
+            .chevron {
+                display: none;
+            }
+            
+            .print-button {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .section-header h2 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Social Eating & Restaurant Navigation</h1>
+            <p>Neurodivergent Affinity Group</p>
+        </div>
+
+        <div class="content">
+            <!-- Section 1: Welcome & Overview -->
+            <div class="section">
+                <div class="section-header" onclick="toggleSection('welcome')">
+                    <div class="section-header-content">
+                        <svg class="section-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path>
+                        </svg>
+                        <h2>Welcome & Overview</h2>
+                    </div>
+                    <svg class="chevron" id="chevron-welcome" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div class="section-content active" id="content-welcome">
+                    <div class="content-box bg-coral-50">
+                        <h3 class="text-coral-800">Today's Focus</h3>
+                        <p class="text-gray-700">Eating in social settings—especially restaurants—can be uniquely challenging for neurodivergent people. Today we'll explore:</p>
+                        <ul class="text-gray-700">
+                            <li>Why social eating feels so overwhelming</li>
+                            <li>Common barriers in restaurant environments</li>
+                            <li>Practical strategies to make dining out more manageable</li>
+                            <li>Ways to honor your needs while navigating social expectations</li>
+                        </ul>
+                    </div>
+
+                    <div class="facilitator-note">
+                        <strong>Facilitator Note:</strong> Emphasize that there's no "right way" to handle social eating. Some people may choose to avoid restaurants entirely, and that's valid. Others may want strategies to make dining out more comfortable. Both approaches are okay.
+                    </div>
+
+                    <div class="content-box bg-green-50">
+                        <h3 class="text-green-800">Group Agreements</h3>
+                        <ul class="text-gray-700">
+                            <li><strong>Confidentiality:</strong> What's shared here stays here</li>
+                            <li><strong>Respect differences:</strong> We all have different sensory profiles and needs</li>
+                            <li><strong>No pressure to share:</strong> You can pass on any question</li>
+                            <li><strong>Body autonomy:</strong> You know your needs best</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Check-In -->
+            <div class="section">
+                <div class="section-header" onclick="toggleSection('checkin')">
+                    <div class="section-header-content">
+                        <svg class="section-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path>
+                        </svg>
+                        <h2>Check-In</h2>
+                    </div>
+                    <svg class="chevron" id="chevron-checkin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div class="section-content" id="content-checkin">
+                    <div class="facilitator-note">
+                        <strong>Facilitator Note:</strong> Go around the circle. Each person shares their name and both prompts. Remind folks they can pass if they'd prefer.
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="content-box bg-blue-50">
+                            <h4 class="text-gray-800">Body Battery Check</h4>
+                            <p style="font-size: 0.875rem; color: #6b7280; font-style: italic;">(How much energy you're working with today)</p>
+                            <p style="font-size: 0.875rem; color: #6b7280; margin-top: 5px;">Ex: "My body battery is at about 60% today—I slept okay but I'm a bit drained from yesterday"</p>
+                        </div>
+                        <div class="content-box bg-yellow-50">
+                            <h4 class="text-gray-800">When was the last time you ate at a restaurant?</h4>
+                            <p style="font-size: 0.875rem; color: #6b7280;">What was that experience like for you?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Breaking Down Restaurant Experiences -->
+            <div class="section">
+                <div class="section-header" onclick="toggleSection('understanding')">
+                    <div class="section-header-content">
+                        <svg class="section-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                        </svg>
+                        <h2>Breaking Down Restaurant Experiences</h2>
+                    </div>
+                    <svg class="chevron" id="chevron-understanding" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div class="section-content" id="content-understanding">
+                    <div class="content-box bg-green-50">
+                        <h3 class="text-green-800">Dining out is not a single task</h3>
+                        <p class="text-gray-700" style="margin-bottom: 15px;">It's a complex series of steps involving executive functioning, sensory processing, social navigation, decision-making, and managing social expectations—often all at once.</p>
+                        <p class="text-gray-700 font-semibold">Let's break it down so we can identify specific barriers.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-blue content-box bg-blue-50">
+                            <h4 style="font-size: 1.125rem; margin-bottom: 10px;">Step 1: Before You Go</h4>
+                            <ul class="text-gray-700">
+                                <li>Deciding if you want to go</li>
+                                <li>Choosing a restaurant</li>
+                                <li>Checking the menu ahead of time</li>
+                                <li>Managing anticipatory anxiety</li>
+                                <li>Planning transportation</li>
+                                <li>Coordinating with others</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-4 border-coral content-box bg-coral-50">
+                            <h4 style="font-size: 1.125rem; margin-bottom: 10px;">Step 2: Arriving & Getting Seated</h4>
+                            <ul class="text-gray-700">
+                                <li>Navigating a new environment</li>
+                                <li>Dealing with wait times</li>
+                                <li>Sensory input (noise, smells, lighting, temperature)</li>
+                                <li>Seating preferences and accommodations</li>
+                                <li>Initial social pressure (small talk, greetings)</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-4 border-green content-box bg-green-50">
+                            <h4 style="font-size: 1.125rem; margin-bottom: 10px;">Step 3: Ordering</h4>
+                            <ul class="text-gray-700">
+                                <li>Processing the menu quickly</li>
+                                <li>Making decisions under time pressure</li>
+                                <li>Communicating dietary needs or modifications</li>
+                                <li>Managing social expectations ("order something normal")</li>
+                                <li>Anxiety about being perceived as "difficult"</li>
+                                <li>Speaking to servers</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-4 border-blue content-box bg-blue-50">
+                            <h4 style="font-size: 1.125rem; margin-bottom: 10px;">Step 4: Waiting for Food</h4>
+                            <ul class="text-gray-700">
+                                <li>Sustaining conversation</li>
+                                <li>Managing hunger/low blood sugar</li>
+                                <li>Continued sensory exposure</li>
+                                <li>Sitting still for extended periods</li>
+                                <li>Masking discomfort</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-4 border-coral content-box bg-coral-50">
+                            <h4 style="font-size: 1.125rem; margin-bottom: 10px;">Step 5: Eating</h4>
+                            <ul class="text-gray-700">
+                                <li>Eating in front of others</li>
+                                <li>Matching pace with others</li>
+                                <li>Managing sensory aspects of food</li>
+                                <li>Continuing to mask/socialize while eating</li>
+                                <li>Dealing with unexpected food issues</li>
+                                <li>Managing eating disorder thoughts/behaviors</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-4 border-green content-box bg-green-50">
+                            <h4 style="font-size: 1.125rem; margin-bottom: 10px;">Step 6: Wrapping Up</h4>
+                            <ul class="text-gray-700">
+                                <li>Splitting bills/calculating tips</li>
+                                <li>Managing financial anxiety</li>
+                                <li>Knowing when it's "appropriate" to leave</li>
+                                <li>Social goodbyes and small talk</li>
+                                <li>Getting home while depleted</li>
+                                <li>Recovery time afterward</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="facilitator-note">
+                        <strong>Discussion Prompt:</strong> "Which step feels most challenging for you? Are there certain steps that don't bother you at all?"
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Common Barriers -->
+            <div class="section">
+                <div class="section-header" onclick="toggleSection('barriers')">
+                    <div class="section-header-content">
+                        <svg class="section-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                        </svg>
+                        <h2>Common Barriers & Challenges</h2>
+                    </div>
+                    <svg class="chevron" id="chevron-barriers" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div class="section-content" id="content-barriers">
+                    <div class="space-y-4">
+                        <div class="content-box bg-purple-50">
+                            <h4 class="font-semibold text-gray-800">Sensory Overload</h4>
+                            <ul class="text-gray-700">
+                                <li><strong>Noise:</strong> Crowded restaurants, background music, clattering dishes, multiple conversations</li>
+                                <li><strong>Lighting:</strong> Harsh fluorescents, dim lighting, flickering candles</li>
+                                <li><strong>Smells:</strong> Overlapping food odors, cleaning products, perfumes</li>
+                                <li><strong>Temperature:</strong> Too hot, too cold, inconsistent</li>
+                                <li><strong>Textures:</strong> Sticky tables, uncomfortable seating, unexpected food textures</li>
+                            </ul>
+                        </div>
+
+                        <div class="content-box bg-blue-50">
+                            <h4 class="font-semibold text-gray-800">Executive Function Challenges</h4>
+                            <ul class="text-gray-700">
+                                <li><strong>Decision paralysis:</strong> Too many menu options</li>
+                                <li><strong>Working memory:</strong> Trying to remember menu items while conversing</li>
+                                <li><strong>Task switching:</strong> Shifting between eating, talking, monitoring social cues</li>
+                                <li><strong>Time management:</strong> How long to stay, when to leave</li>
+                                <li><strong>Mental math:</strong> Calculating bills and tips under pressure</li>
+                            </ul>
+                        </div>
+
+                        <div class="content-box bg-yellow-50">
+                            <h4 class="font-semibold text-gray-800">Social & Communication Demands</h4>
+                            <ul class="text-gray-700">
+                                <li><strong>Unwritten rules:</strong> When to order, appropriate conversation topics, table manners</li>
+                                <li><strong>Sustained eye contact</strong> while eating and talking</li>
+                                <li><strong>Reading social cues</strong> about when to speak, when others are done eating</li>
+                                <li><strong>Masking:</strong> Suppressing stims, managing facial expressions, appearing "normal"</li>
+                                <li><strong>Small talk:</strong> Before, during, and after the meal</li>
+                                <li><strong>Managing others' expectations</strong> about food choices</li>
+                            </ul>
+                        </div>
+
+                        <div class="content-box bg-green-50">
+                            <h4 class="font-semibold text-gray-800">Food-Specific Challenges</h4>
+                            <ul class="text-gray-700">
+                                <li><strong>Safe foods:</strong> Limited options, unfamiliar preparations</li>
+                                <li><strong>Dietary restrictions:</strong> Communicating needs, fear of cross-contamination</li>
+                                <li><strong>Food anxiety:</strong> Trying new things, ingredients you can't see</li>
+                                <li><strong>Portion sizes:</strong> Too much, too little, no control</li>
+                                <li><strong>Eating disorder thoughts</strong> triggered by social eating</li>
+                                <li><strong>ARFID considerations:</strong> Texture aversions, fear of new foods</li>
+                            </ul>
+                        </div>
+
+                        <div class="content-box bg-coral-50">
+                            <h4 class="font-semibold text-gray-800">Interoception & Physical Needs</h4>
+                            <ul class="text-gray-700">
+                                <li>Difficulty identifying hunger/fullness cues in overstimulating environment</li>
+                                <li>Managing bathroom needs without interrupting social flow</li>
+                                <li>Physical discomfort from sitting still</li>
+                                <li>Difficulty regulating body temperature</li>
+                                <li>Medication timing (especially if it affects appetite)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="facilitator-note">
+                        <strong>Discussion Prompt:</strong> "Which of these barriers resonate most with you? Are there any barriers we didn't mention?"
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Strategies - Before You Go -->
+            <div class="section">
+                <div class="section-header" onclick="toggleSection('before')">
+                    <div class="section-header-content">
+                        <svg class="section-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                        </svg>
+                        <h2>Strategies: Before You Go</h2>
+                    </div>
+                    <svg class="chevron" id="chevron-before" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div class="section-content" id="content-before">
+                    <div class="space-y-4">
+                        <div class="strategy-box">
+                            <p class="font-semibold text-purple-700">Research the restaurant ahead of time</p>
+                            <p style="font-size: 0.875rem;" class="text-gray-700">Look up photos, reviews mentioning noise levels, menu online, hours when it's less busy</p>
+                            <p style="font-size: 0.875rem; margin-top: 10px;" class="text-gray-700"><strong>Why it helps:</strong> Reduces unknowns and allows you to mentally prepare</p>
+                        </div>
+
+                        <div class="strategy-box">
+                            <p class="font-semibold text-purple-700">Pre-decide what you'll order</p>
+                            <p style="font-size: 0.875rem;" class="text-gray-700">Choose your meal before arriving. Save a screenshot or note of the menu item</p>
+                            <p style="font-size: 0.875rem; margin-top: 10px;" class="text-gray-700"><strong>Why it helps:</strong> Eliminates decision-making pressure in the moment</p>
+                        </div>
+
+                        <div class="strategy-box">
+                            <p class="font-semibold text-purple-700">Eat a small snack beforehand</p>
+                            <p style="font-size: 0.875rem;" class="text-gray-700">Don't arrive starving. A light snack can stabilize blood sugar and reduce urgency</p>
+                            <p style="font-size: 0.875rem; margin-top: 10px;" class="text-gray-700"><strong>Why it helps:</strong> Prevents irritability, decision fatigue, and social pressure to order quickly</p>
+                        </div>
+
+                        <div class="strategy-box">
+                            <p class="font-semibold text-purple-700">Communicate your needs in advance</p>
+                            <p style="font-size: 0.875rem;" class="text-gray-700">If going with friends/family: "I need a quieter table" or "I'll need extra time to look at the menu"</p>
+                            <p style="font-size: 0.875rem; margin-top: 10px;" class="text-gray-700"><strong>Why it helps:</strong> Sets expectations and reduces pressure to mask</p>
+                        </div>
+
+                        <div class="strategy-box">
+                            <p class="font-semibold text-purple-700">Call ahead to request accommodations</p>
+                            <p style="font-size: 0.875rem;" class="text-gray-700">Ask for: quieter seating, corner booth, table away from kitchen/bathroom, ability to order upon arrival</p>
+                            <p style="font-size: 0.875rem; margin-top: 10px;" class="text-gray-700"><strong>Why it helps:</strong> Many restaurants are happy to accommodate if asked</p>
+                        </div>
+
+                        <div class="strategy-box">
+                            <p class="font-semibold text-purple-700">Choose off-peak hours</p>
+                            <p style="font-size: 0.875rem;" class="text-gray-700">Lunch at 2pm, dinner at 5pm, weekday vs. weekend—less crowded = less sensory input</p>
+                            <p style="font-size: 0.875rem; margin-top: 10px;" class="text-gray-700"><strong>Why it helps:</strong> Significantly reduces noise, wait times, and social pressure</p>
+                        </div>
+
+                        <div class="strategy-box">
+                            <p class="font-semibold text-purple-700">Pack your "comfort kit"</p>
+                            <p style="font-size: 0.875rem;" class="text-gray-700">Earplugs/loop earplugs, fidget toy, mints/gum, sunglasses, hand sanitizer, stim toy</p>
+                            <p style="font-size: 0.875rem; margin-top: 10px;" class="text-gray-700"><strong>Why it helps:</strong> Gives you tools to manage sensory input in the moment</p>
+                        </div>
+
+                        <div class="strategy-box">
+                            <p class="font-semibold text-purple-700">Set time boundaries</p>
+                            <p style="font-size: 0.875rem;" class="text-gray-700">"I can only stay for an hour" or create an "excuse" to leave (appointment, work call, etc.)</p>
+                            <p style="font-size: 0.875rem; margin-top: 10px;" class="text-gray-700"><strong>Why it helps:</strong> Knowing there's an endpoint makes it more manageable</p>
+                        </div>
+                    </div>
+
+                    <div class="facilitator-note">
+                        <strong>Discussion Prompt:</strong> "What preparation strategies have you tried? What worked or didn't work?"
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: Strategies - During the Meal -->
+            <div class="section">
+                <div class="section-header" onclick="toggleSection('during')">
+                    <div class="section-header-content">
+                        <svg class="section-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <h2>Strategies: During the Meal</h2>
+                    </div>
+                    <svg class="chevron" id="chevron-during" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div class="section-content" id="content-during">
+                    <div class="space-y-4">
+                        <div class="content-box bg-blue-50">
+                            <h4 style="font-size: 1.125rem; margin-bottom: 15px;">Managing Sensory Input</h4>
+                            <div class="space-y-4">
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Use discreet sensory tools</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">Loop earplugs (nearly invisible), sunglasses indoors, fidget ring, grounding techniques</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Choose your seat strategically</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">Back to the wall (less visual input), away from kitchen/bathroom, near exit, booth over table</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Take sensory breaks</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">"I need to use the restroom" = acceptable way to step away and decompress</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Regulate temperature</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">Bring a light sweater/jacket, ask server to adjust AC, sit away from drafts</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content-box bg-green-50">
+                            <h4 style="font-size: 1.125rem; margin-bottom: 15px;">Ordering & Food Choices</h4>
+                            <div class="space-y-4">
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Order first if possible</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">"I know what I want!" reduces waiting and second-guessing</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Use scripts for modifications</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">"Could I get X without Y?" or "I have a dietary restriction, can you check on Z for me?"</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Order "safe" items</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">There is NO shame in ordering the same thing every time or choosing familiar foods</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Ask for sides/modifications separately</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">"Sauce on the side," "No garnish," "Plain, please"—you're allowed to customize</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Use apps/cards for dietary needs</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">Allergy translation cards, gluten-free apps, FODMAP guides on your phone</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content-box bg-yellow-50">
+                            <h4 style="font-size: 1.125rem; margin-bottom: 15px;">Social & Communication</h4>
+                            <div class="space-y-4">
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Give yourself permission to "mask less"</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">Stim if you need to, look away during conversation, take breaks from eye contact</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Use "conversation anchors"</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">Ask questions to keep others talking (reduces pressure on you to generate conversation)</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Script responses to common questions</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">"Not very hungry today," "I'm pacing myself," "This is what sounds good to me"</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Signal when you need quiet</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">"I'm feeling a bit overwhelmed—mind if we just eat for a minute?"</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Bring a "buddy" who understands</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">Someone who knows your signals, can help buffer social demands, or advocate for you</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content-box bg-coral-50">
+                            <h4 style="font-size: 1.125rem; margin-bottom: 15px;">Managing Physical & Interoceptive Needs</h4>
+                            <div class="space-y-4">
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Check in with your body</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">Pause to notice: Am I still hungry? Do I need to move? Am I getting overstimulated?</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Move when you need to</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">Shift in your seat, stretch, tap your feet, take a bathroom break to move around</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Pace yourself</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">You don't have to match others' eating speed. Eat at your own rhythm</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Use grounding techniques</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">5-4-3-2-1 senses, feet on floor, holding ice/cold drink, deep breaths</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="facilitator-note">
+                        <strong>Discussion Prompt:</strong> "Which of these strategies seem most helpful for you? Are there any you'd like to try?"
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 7: Strategies - Wrapping Up & Recovery -->
+            <div class="section">
+                <div class="section-header" onclick="toggleSection('after')">
+                    <div class="section-header-content">
+                        <svg class="section-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                        <h2>Wrapping Up & Recovery</h2>
+                    </div>
+                    <svg class="chevron" id="chevron-after" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div class="section-content" id="content-after">
+                    <div class="space-y-4">
+                        <div class="content-box bg-purple-50">
+                            <h4 style="font-size: 1.125rem; margin-bottom: 15px;">Managing the Bill & Leaving</h4>
+                            <div class="space-y-4">
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Pre-calculate tip on your phone</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">Use calculator or tip app to reduce math anxiety. Have amount ready</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Venmo/split apps reduce stress</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">Agree ahead of time to split digitally rather than doing mental math at the table</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">It's okay to leave when you need to</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">"I need to head out" is a complete sentence. You don't owe extended explanations</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Have an exit strategy</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">Park where you can leave easily, have ride arranged, know what you'll say to leave</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content-box bg-green-50">
+                            <h4 style="font-size: 1.125rem; margin-bottom: 15px;">Post-Restaurant Recovery</h4>
+                            <div class="space-y-4">
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Plan downtime afterward</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">Block off time after social eating to decompress—don't schedule back-to-back activities</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Sensory recovery</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">Quiet space, dim lights, comforting textures, favorite music/white noise</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Physical recovery</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">Movement if you were sitting still, rest if you're depleted, water/hydration</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Acknowledge what you did</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">Social eating is HARD. Give yourself credit for showing up, even if it didn't go perfectly</p>
+                                </div>
+
+                                <div class="strategy-box">
+                                    <p class="font-semibold text-purple-700">Process with someone who gets it</p>
+                                    <p style="font-size: 0.875rem;" class="text-gray-700">Text a friend, journal, debrief with therapist—externalize the experience</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 8: Alternatives to Traditional Restaurant Dining -->
+            <div class="section">
+                <div class="section-header" onclick="toggleSection('alternatives')">
+                    <div class="section-header-content">
+                        <svg class="section-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        <h2>Alternatives to Traditional Dining Out</h2>
+                    </div>
+                    <svg class="chevron" id="chevron-alternatives" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div class="section-content" id="content-alternatives">
+                    <div class="content-box bg-blue-50">
+                        <h3 class="text-blue-800">You don't have to eat at restaurants to have social meals</h3>
+                        <p class="text-gray-700">If traditional dining out doesn't work for you, here are other ways to share meals with people:</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="strategy-box">
+                            <p class="font-semibold text-purple-700">Takeout picnics</p>
+                            <p style="font-size: 0.875rem;" class="text-gray-700">Order food and eat outside in a park, at home, or somewhere with less sensory demand</p>
+                        </div>
+
+                        <div class="strategy-box">
+                            <p class="font-semibold text-purple-700">Host at home</p>
+                            <p style="font-size: 0.875rem;" class="text-gray-700">Control the environment, menu, timing. Can step away to your room if needed</p>
+                        </div>
+
+                        <div class="strategy-box">
+                            <p class="font-semibold text-purple-700">Food trucks or counter-service spots</p>
+                            <p style="font-size: 0.875rem;" class="text-gray-700">Less formal, faster ordering, often outdoor seating, more control over pacing</p>
+                        </div>
+
+                        <div class="strategy-box">
+                            <p class="font-semibold text-purple-700">Parallel eating</p>
+                            <p style="font-size: 0.875rem;" class="text-gray-700">Each person brings their own food, eat together in a comfortable space</p>
+                        </div>
+
+                        <div class="strategy-box">
+                            <p class="font-semibold text-purple-700">Activity-based socializing</p>
+                            <p style="font-size: 0.875rem;" class="text-gray-700">Movie + snacks, board game cafés, mini golf—takes pressure off conversation</p>
+                        </div>
+
+                        <div class="strategy-box">
+                            <p class="font-semibold text-purple-700">One-on-one meals</p>
+                            <p style="font-size: 0.875rem;" class="text-gray-700">Less socially demanding than groups. Easier to communicate needs</p>
+                        </div>
+
+                        <div class="strategy-box">
+                            <p class="font-semibold text-purple-700">Virtual meals</p>
+                            <p style="font-size: 0.875rem;" class="text-gray-700">FaceTime/Zoom dinner—social connection without leaving your sensory-safe space</p>
+                        </div>
+
+                        <div class="strategy-box">
+                            <p class="font-semibold text-purple-700">Just say no</p>
+                            <p style="font-size: 0.875rem;" class="text-gray-700">"I'd love to hang out but restaurants are really hard for me—want to do X instead?"</p>
+                        </div>
+                    </div>
+
+                    <div class="content-box bg-green-50">
+                        <h3 class="text-green-800">Remember:</h3>
+                        <p class="text-gray-700">Choosing not to eat at restaurants is a valid accommodation. You are not missing out or being "difficult"—you are honoring your needs.</p>
+                    </div>
+
+                    <div class="facilitator-note">
+                        <strong>Discussion Prompt:</strong> "What alternatives have you tried? What makes social eating feel more manageable for you?"
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 9: Reflection & Action Planning -->
+            <div class="section">
+                <div class="section-header" onclick="toggleSection('reflection')">
+                    <div class="section-header-content">
+                        <svg class="section-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                        </svg>
+                        <h2>Reflection & Action Planning</h2>
+                    </div>
+                    <svg class="chevron" id="chevron-reflection" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div class="section-content" id="content-reflection">
+                    <div class="facilitator-note">
+                        <strong>Facilitator Note:</strong> Give folks 5-10 minutes to reflect individually. Invite sharing afterward (but don't require it).
+                    </div>
+
+                    <div class="content-box bg-yellow-50">
+                        <h4 class="text-gray-800">What resonated most from today's discussion?</h4>
+                        <p style="font-size: 0.875rem; color: #6b7280; margin-top: 10px;">What insights, strategies, or validations stood out to you?</p>
+                    </div>
+
+                    <div class="content-box bg-blue-50">
+                        <h4 class="text-gray-800">What's one strategy you'd like to try?</h4>
+                        <p style="font-size: 0.875rem; color: #6b7280; margin-top: 10px;">Be specific: When will you try it? What support do you need?</p>
+                    </div>
+
+                    <div class="content-box bg-green-50">
+                        <h4 class="text-gray-800">What boundaries do you want to set around social eating?</h4>
+                        <p style="font-size: 0.875rem; color: #6b7280; margin-top: 10px;">What do you need to say "no" to? What accommodations do you want to ask for?</p>
+                    </div>
+
+                    <div class="content-box bg-coral-50">
+                        <h4 class="text-gray-800">How will you give yourself credit for navigating social eating?</h4>
+                        <p style="font-size: 0.875rem; color: #6b7280; margin-top: 10px;">Even small steps count. How will you acknowledge your efforts?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 10: Key Takeaways -->
+            <div class="section">
+                <div class="section-header" onclick="toggleSection('takeaways')">
+                    <div class="section-header-content">
+                        <svg class="section-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <h2>Key Takeaways</h2>
+                    </div>
+                    <svg class="chevron" id="chevron-takeaways" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div class="section-content" id="content-takeaways">
+                    <div class="space-y-4">
+                        <div class="content-box bg-green-50">
+                            <p class="text-gray-700 font-semibold" style="font-size: 1.125rem;">✓ Restaurant dining is legitimately hard for neurodivergent people</p>
+                            <p class="text-gray-700">It's not you being "difficult" or "too sensitive"—it's a complex task with real barriers</p>
+                        </div>
+
+                        <div class="content-box bg-blue-50">
+                            <p class="text-gray-700 font-semibold" style="font-size: 1.125rem;">✓ You are allowed to accommodate yourself</p>
+                            <p class="text-gray-700">Requesting a quiet table, ordering first, taking breaks, leaving early—all valid</p>
+                        </div>
+
+                        <div class="content-box bg-yellow-50">
+                            <p class="text-gray-700 font-semibold" style="font-size: 1.125rem;">✓ There are many ways to have social meals</p>
+                            <p class="text-gray-700">Traditional restaurants are not the only option. Find what works for YOU</p>
+                        </div>
+
+                        <div class="content-box bg-coral-50">
+                            <p class="text-gray-700 font-semibold" style="font-size: 1.125rem;">✓ Preparation reduces overwhelm</p>
+                            <p class="text-gray-700">Researching ahead, pre-deciding, bringing tools—all help you succeed</p>
+                        </div>
+
+                        <div class="content-box bg-purple-50">
+                            <p class="text-gray-700 font-semibold" style="font-size: 1.125rem;">✓ Recovery matters as much as the event</p>
+                            <p class="text-gray-700">Social eating is draining. You NEED downtime afterward—build it in</p>
+                        </div>
+
+                        <div class="content-box bg-green-50">
+                            <p class="text-gray-700 font-semibold" style="font-size: 1.125rem;">✓ Saying "no" to restaurants is okay</p>
+                            <p class="text-gray-700">You don't owe anyone restaurant attendance. Suggest alternatives that work better</p>
+                        </div>
+                    </div>
+
+                    <div class="content-box bg-gray-50" style="margin-top: 30px; border-left: 4px solid #e07856;">
+                        <p class="text-gray-700 italic" style="font-size: 1.125rem; line-height: 1.8;">
+                            "Social eating doesn't have to look a certain way. You get to define what 'sharing a meal' means for you—and that definition is valid."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="print-button" onclick="window.print()">Print Handout</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(sectionId) {
+            const content = document.getElementById('content-' + sectionId);
+            const chevron = document.getElementById('chevron-' + sectionId);
+            
+            content.classList.toggle('active');
+            chevron.classList.toggle('rotated');
+        }
+
+        // Open first section by default
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('content-welcome').classList.add('active');
+            document.getElementById('chevron-welcome').classList.add('rotated');
+        });
+    </script>
+</body>
+</html>
